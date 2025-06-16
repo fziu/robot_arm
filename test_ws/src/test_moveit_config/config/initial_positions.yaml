@@ -1,4 +1,0 @@
-# Default initial positions for test_robot's ros2_control fake system
-
-initial_positions:
-  joint_1: 0

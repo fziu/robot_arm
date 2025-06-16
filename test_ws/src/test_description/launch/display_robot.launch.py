@@ -32,7 +32,7 @@ def generate_launch_description():
         package="robot_state_publisher",
         executable="robot_state_publisher",
         output="both",
-        parameters=[robot_description]
+        parameters=[robot_description, {"use_sim_time": True}],
     )
 
     rviz_node = Node(
@@ -40,21 +40,24 @@ def generate_launch_description():
         executable="rviz2",
         name="rviz2",
         output="log",
-        arguments=["-d", rviz_config_file]
+        arguments=["-d", rviz_config_file],
+        parameters=[{"use_sim_time": True}]
     )
 
     joint_state_broadcaster_spawner = Node(
         package="controller_manager",
         executable="spawner",
         arguments=["joint_state_broadcaster", "--controller-manager", "/controller_manager"],
-        output="screen"
+        output="screen",
+        parameters=[{"use_sim_time": True}]
     )
 
     robot_trajectory_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
         arguments=["joint_trajectory_position_controller", "--controller-manager", "/controller_manager"],
-        output="screen"
+        output="screen",
+        parameters=[{"use_sim_time": True}]
     )
 
     gazebo = IncludeLaunchDescription(
@@ -66,7 +69,8 @@ def generate_launch_description():
         package = "gazebo_ros",
         executable = "spawn_entity.py",
         arguments = ["-topic", "/robot_description", "-entity", "robot"],
-        output="screen"
+        output="screen",
+        parameters=[{"use_sim_time": True}]
     )
 
     # 执行完target_action，再执行on_exit
