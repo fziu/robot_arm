@@ -16,6 +16,11 @@ forward_position_controller:
   ros__parameters:
     joints:
       - joint1
+      - joint2
+      - joint3
+      - joint4
+      - joint5
+      - joint6
 
     interface_name: position
 
@@ -24,6 +29,11 @@ joint_trajectory_position_controller:
   ros__parameters:
     joints:
       - joint1
+      - joint2
+      - joint3
+      - joint4
+      - joint5
+      - joint6
 
     command_interfaces:
       - position
