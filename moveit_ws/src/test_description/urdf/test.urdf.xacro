@@ -3,6 +3,8 @@
     
     <xacro:include filename="$(find test_description)/urdf/materials.xacro"/>
     <xacro:include filename="$(find test_description)/urdf/base.xacro"/>
+    <xacro:include filename="$(find test_description)/urdf/gazebo.xacro"/>
 
     <xacro:base/>
+    <xacro:gazebo/>
 </robot>

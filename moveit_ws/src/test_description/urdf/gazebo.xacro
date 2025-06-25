@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:macro name="gazebo">
+    
+    <xacro:macro name="SimpleTransmission" params="trans joint actuator">
+        <transmission name="${trans}">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="${joint}">
+                <hardwareInterface>PositionJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="${actuator}">
+                <mechanicalReduction>1</mechanicalReduction>
+                <hardwareInterface>PositionJointInterface</hardwareInterface>
+            </actuator>
+        </transmission>
+    </xacro:macro>
+
+    <xacro:SimpleTransmission trans="trans1" joint="joint1" actuator="actuator1" />
+    <xacro:SimpleTransmission trans="trans2" joint="joint2" actuator="actuator2" />
+    <xacro:SimpleTransmission trans="trans3" joint="joint3" actuator="actuator3" />
+    <xacro:SimpleTransmission trans="trans4" joint="joint4" actuator="actuator4" />
+    <xacro:SimpleTransmission trans="trans5" joint="joint5" actuator="actuator5" />
+    <xacro:SimpleTransmission trans="trans6" joint="joint6" actuator="actuator6" />
+
+    <gazebo>
+        <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
+            <parameters>$(find test_description)/config/ros2_controllers.yaml</parameters>
+        </plugin>
+    </gazebo>
+    </xacro:macro>
+</robot>

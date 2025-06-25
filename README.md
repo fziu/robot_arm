@@ -28,7 +28,12 @@ ros2 run test_control test_control --ros-args -p use_sim_time:=true
 source install/setup.bash
 
 ros2 run moveit_setup_assistant moveit_setup_assistant
-
+```
 action_ns: follow_joint_trajectory
 default: true
 type: FollowJointTrajectory
+```
+
+ros2 launch test_moveit_config demo_gazebo.launch.py
+
+ros2 param set /move_group use_sim_time true

@@ -2,6 +2,7 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
     <xacro:macro name="base">
         <xacro:property name="PI" value="3.1415926"/>
+        <link name="world" />
 
         <link name="base_link">
             <visual>
@@ -149,6 +150,12 @@
                 <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
             </inertial>
         </link>
+
+        <joint name="world_joint" type="fixed">
+            <parent link="world" />
+            <child link="base_link" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+        </joint>
 
         <joint name="joint1" type="revolute">
             <parent link="base_link"/>
