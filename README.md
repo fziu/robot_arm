@@ -45,3 +45,4 @@ move_group参数导出
 ros2 param dump /move_group > real_move_group.yaml
 ### Final
 ros2 launch test_bringup bringup.launch.py  
+ros2 run test_control test_control

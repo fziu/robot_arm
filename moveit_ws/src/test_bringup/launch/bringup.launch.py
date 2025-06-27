@@ -46,6 +46,15 @@ def generate_launch_description():
     )
     robot_description = {"robot_description": robot_description_config.toxml()}
 
+    ## Robot description Semantic config
+    robot_description_semantic_path = os.path.join(moveit_config_dir, "test_robot.srdf")
+    with open(robot_description_semantic_path, "r") as file:
+        robot_description_semantic_config = file.read()
+
+    robot_description_semantic = {
+        "robot_description_semantic": robot_description_semantic_config
+    }
+
     # rviz
     rviz_node = Node(
         package="rviz2",
@@ -53,7 +62,11 @@ def generate_launch_description():
         name="rviz2",
         output="log",
         arguments=["-d", rviz_config],
-        parameters=[{'use_sim_time': use_sim_time}],
+        parameters=[
+            robot_description,
+            robot_description_semantic,
+            {'use_sim_time': use_sim_time}
+        ],
         condition=IfCondition(use_rviz)
     )
 
@@ -76,10 +89,6 @@ def generate_launch_description():
         package='controller_manager',
         executable='ros2_control_node',
         parameters=[robot_description, ros2_controllers, {'use_sim_time': use_sim_time}],
-        remappings=[
-            ('~/cmd_vel_unstamped', 'cmd_vel'),
-            ('~/odom', 'odom')
-        ],
         output="both",
     )
 
