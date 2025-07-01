@@ -31,9 +31,9 @@ int main(int argc, char *argv[])
 
     geometry_msgs::msg::Pose pose2;
     pose2.orientation.w = 1.0;
-    pose2.position.x = 0.0;
+    pose2.position.x = 0.5;
     pose2.position.y = 0.0;
-    pose2.position.z = 0.0;
+    pose2.position.z = 0.2;
     target_poses.push_back(pose2);
 
     rclcpp::Rate rate(0.2);
@@ -58,7 +58,8 @@ int main(int argc, char *argv[])
         }
 
         // Advance index cyclically
-        if (index == target_poses.size() - 1)
+        index++;
+        if (index == target_poses.size())
             index = 0;
 
         rate.sleep();
